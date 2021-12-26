@@ -67,9 +67,12 @@ let bulkCreateSchedule = async (req, res) => {
   }
 };
 
-let getScheduleByDate= async(req, res)=>{
+let getScheduleByDate = async (req, res) => {
   try {
-    let infor = await doctorService.getScheduleByDate(req.query.doctorId,req.query.date);
+    let infor = await doctorService.getScheduleByDate(
+      req.query.doctorId,
+      req.query.date
+    );
     return res.status(200).json(infor);
   } catch (e) {
     console.log(e);
@@ -78,12 +81,69 @@ let getScheduleByDate= async(req, res)=>{
       message: "Error from server...",
     });
   }
-}
+};
+let getDoctorExtraInforById = async (req, res) => {
+  try {
+    let infor = await doctorService.getDoctorExtraInforById(req.query.doctorId);
+    return res.status(200).json(infor);
+  } catch (e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      message: "Error from server...",
+    });
+  }
+};
+
+let getProfileDoctorById = async (req, res) => {
+  try {
+    let infor = await doctorService.getProfileDoctorById(req.query.doctorId);
+    return res.status(200).json(infor);
+  } catch (e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      message: "Error from server...",
+    });
+  }
+};
+
+let getListPatient = async (req, res) => {
+  try {
+    let infor = await doctorService.getListPatient(
+      req.query.doctorId,
+      req.query.date
+    );
+    return res.status(200).json(infor);
+  } catch (e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      message: "Error from server...",
+    });
+  }
+};
+let sendBill = async (req, res) => {
+  try {
+    let infor = await doctorService.sendBill(req.body);
+    return res.status(200).json(infor);
+  } catch (e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      message: "Error from server...",
+    });
+  }
+};
 module.exports = {
   getTopDoctor: getTopDoctor,
   getAllDoctors: getAllDoctors,
   postInforDoctors: postInforDoctors,
   getDetailDoctorById: getDetailDoctorById,
   bulkCreateSchedule: bulkCreateSchedule,
-  getScheduleByDate:getScheduleByDate
+  getScheduleByDate: getScheduleByDate,
+  getDoctorExtraInforById: getDoctorExtraInforById,
+  getProfileDoctorById: getProfileDoctorById,
+  getListPatient: getListPatient,
+  sendBill: sendBill,
 };
